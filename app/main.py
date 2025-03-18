@@ -1,12 +1,11 @@
-from dotenv import load_dotenv
-load_dotenv()
 from fastapi import FastAPI
-from app.api import router
+from api import router
 
-app = FastAPI(title="MCP Server")
+app = FastAPI(title="My API")
 
-@app.get("/")
-async def read_root():
-    return {"message": "Welcome to the MCP Server!"}
-
+# Подключаем роуты из api.py
 app.include_router(router)
+
+if __name__ == "__main__":
+    import uvicorn
+    uvicorn.run(app, host="0.0.0.0", port=8000, reload=True)
